@@ -37,3 +37,9 @@ test('get undefined by key if there is not associated key-value pair in NaiveMap
   const map = new NaiveMap<number>(testPairs);
   expect(map.get('notToBeFound')).toBeUndefined();
 });
+
+test('set new key-value pair to NaiveMap', () => {
+  const map = new NaiveMap<number>(testPairs);
+  map.set(['newKey', 1]);
+  expect(map.get('newKey')).toBe(1);
+});

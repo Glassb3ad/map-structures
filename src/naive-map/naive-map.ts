@@ -12,4 +12,15 @@ export class NaiveMap<t> {
   get(key: string): t | undefined {
     return this.map.find((pair) => pair[0] === key)?.[1];
   }
+
+  set(newPair: [string, t]): NaiveMap<t> {
+    for (const pair of this.map) {
+      if (pair[0] === newPair[0]) {
+        pair[1] = newPair[1];
+        return this;
+      }
+    }
+    this.map.push(newPair);
+    return this;
+  }
 }
