@@ -4,4 +4,8 @@ export class NaiveMap<t> {
   constructor(map: Array<[string, t]> = []) {
     this.map = map;
   }
+
+  has(key: string): boolean {
+    return true;
+  }
 }
