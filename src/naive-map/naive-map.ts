@@ -8,4 +8,8 @@ export class NaiveMap<t> {
   has(key: string): boolean {
     return this.map.some((pair) => pair[0] === key);
   }
+
+  get(key: string): t | undefined {
+    return this.map.find((pair) => pair[0] === key)?.[1];
+  }
 }
