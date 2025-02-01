@@ -49,3 +49,9 @@ test('if key-value pair exists replace the old value with new', () => {
   map.set([firstTestPairKey, 200]);
   expect(map.get(firstTestPairKey)).toBe(200);
 });
+
+test('Does not introduce duplicate keys when input key already exists', () => {
+  const map = new NaiveMap<number>(testPairs);
+  map.set([firstTestPairKey, 200]);
+  expect(map.map.filter((pair) => pair[0] === firstTestPairKey).length).toBe(1);
+});
