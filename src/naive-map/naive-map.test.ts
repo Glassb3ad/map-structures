@@ -19,5 +19,10 @@ test('Create NaiveMap with initial values', () => {
 
 test('Check that NaiveMap has entry for given key', () => {
   const map = new NaiveMap<number>(testPairs);
-  expect(map.has('1')).toBe(true);
+  expect(map.has(firstTestPairKey)).toBe(true);
+});
+
+test('Check that NaiveMap does not have entry for given key', () => {
+  const map = new NaiveMap<number>(testPairs);
+  expect(map.has('notToBeFound')).toBe(false);
 });

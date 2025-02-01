@@ -6,6 +6,6 @@ export class NaiveMap<t> {
   }
 
   has(key: string): boolean {
-    return true;
+    return this.map.some((pair) => pair[0] === key);
   }
 }
