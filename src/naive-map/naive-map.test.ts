@@ -43,3 +43,9 @@ test('set new key-value pair to NaiveMap', () => {
   map.set(['newKey', 1]);
   expect(map.get('newKey')).toBe(1);
 });
+
+test('if key-value pair exists replace the old value with new', () => {
+  const map = new NaiveMap<number>(testPairs);
+  map.set([firstTestPairKey, 200]);
+  expect(map.get(firstTestPairKey)).toBe(200);
+});
