@@ -8,13 +8,15 @@
     "start": "node build/index.js",
     "build": "tsc",
     "test": "vitest run",
-    "test-watch": "vitest watch"
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^22.13.0",
+    "@vitest/coverage-v8": "^3.0.4",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3",
     "vitest": "^3.0.4"
