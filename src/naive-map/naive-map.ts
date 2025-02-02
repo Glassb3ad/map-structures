@@ -2,7 +2,7 @@ export class NaiveMap<t> {
   map: Array<[string, t]> = [];
 
   constructor(map: Array<[string, t]> = []) {
-    this.map = map;
+    this.map = [...map];
   }
 
   has(key: string): boolean {
@@ -20,11 +20,16 @@ export class NaiveMap<t> {
         return this;
       }
     }
-    this.map.push(newPair);
+    this.map.push([...newPair]);
     return this;
   }
 
   delete(key: string): boolean {
+    const index = this.map.findIndex((pair) => pair[0] === key);
+    if (index === -1) {
+      return false;
+    }
+    this.map = this.map.slice(0, index).concat(this.map.slice(index + 1));
     return true;
   }
 }

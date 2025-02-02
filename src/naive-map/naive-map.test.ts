@@ -71,4 +71,16 @@ describe('NaiveMap.delete', () => {
     const map = new NaiveMap<number>(testPairs);
     expect(map.delete(firstTestPairKey)).toBe(true);
   });
+
+  test('remove key-value pair that matches key', () => {
+    const map = new NaiveMap<number>(testPairs);
+    map.delete(firstTestPairKey);
+    expect(map.map).not.toContainEqual(firstTestPair);
+  });
+
+  test('Does not remove key-value pairs that do not match key', () => {
+    const map = new NaiveMap<number>(testPairs);
+    map.delete(firstTestPairKey);
+    expect(map.map).toContainEqual(['2', 2]);
+  });
 });
