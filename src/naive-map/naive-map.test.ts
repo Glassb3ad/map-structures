@@ -65,3 +65,10 @@ describe('NaiveMap.set', () => {
     );
   });
 });
+
+describe('NaiveMap.delete', () => {
+  test('return true when key has value', () => {
+    const map = new NaiveMap<number>(testPairs);
+    expect(map.delete(firstTestPairKey)).toBe(true);
+  });
+});

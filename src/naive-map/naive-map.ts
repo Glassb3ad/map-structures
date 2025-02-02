@@ -23,4 +23,8 @@ export class NaiveMap<t> {
     this.map.push(newPair);
     return this;
   }
+
+  delete(key: string): boolean {
+    return true;
+  }
 }
