@@ -13,9 +13,9 @@ This repository contains a collection of map-structures which all implement the 
 
 Naive map is simple implementation where map is an array of key-value pairs. Methods ensure that each key has only one value if any.
 
-## functions-only Naive map
+## functions only Naive map
 
-Map structure that uses only functions and boolean operators
+Map structure that uses only functions and boolean operators (no objects or arrays allowed!). The trick is that pair is implemented as a function. This is just for fun and has the same time complexities as Naive map.
 
 ## Hash map
 
