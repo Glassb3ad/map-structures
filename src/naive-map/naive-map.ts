@@ -45,11 +45,16 @@ export class NaiveMap<t> {
   }
 
   delete(key: string): boolean {
-    const index = this.map.findIndex((pair) => pair[0] === key);
-    if (index === -1) {
-      return false;
+    let entryDeleted = false;
+    const newMap = [];
+    for (const pair of this.map) {
+      if (pair[0] !== key) {
+        newMap.push(pair);
+      } else {
+        entryDeleted = true;
+      }
     }
-    this.map = this.map.slice(0, index).concat(this.map.slice(index + 1));
-    return true;
+    this.map = newMap;
+    return entryDeleted;
   }
 }
