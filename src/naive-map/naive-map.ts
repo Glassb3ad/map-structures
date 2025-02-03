@@ -31,13 +31,16 @@ export class NaiveMap<t> {
   }
 
   set(newPair: [string, t]): NaiveMap<t> {
-    for (const pair of this.map) {
-      if (pair[0] === newPair[0]) {
-        pair[1] = newPair[1];
-        return this;
-      }
+    const existingPair = this.searchEntryAndApply<[string, t] | undefined>(
+      newPair[0],
+      (entry) => entry,
+      undefined
+    );
+    if (existingPair) {
+      existingPair[1] = newPair[1];
+    } else {
+      this.map.push([...newPair]);
     }
-    this.map.push([...newPair]);
     return this;
   }
 
