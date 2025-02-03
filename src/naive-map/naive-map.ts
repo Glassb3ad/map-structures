@@ -5,13 +5,21 @@ export class NaiveMap<t> {
     this.map = [...map];
   }
 
-  has(key: string): boolean {
+  searchEntryAndApply<t1>(
+    key: string,
+    func: (entry: [string, t]) => t1,
+    fallback: t1
+  ): t1 {
     for (const pair of this.map) {
       if (pair[0] === key) {
-        return true;
+        return func(pair);
       }
     }
-    return false;
+    return fallback;
+  }
+
+  has(key: string): boolean {
+    return this.searchEntryAndApply<boolean>(key, () => true, false);
   }
 
   get(key: string): t | undefined {
