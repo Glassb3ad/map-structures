@@ -23,12 +23,11 @@ export class NaiveMap<t> {
   }
 
   get(key: string): t | undefined {
-    for (const pair of this.map) {
-      if (pair[0] === key) {
-        return pair[1];
-      }
-    }
-    return undefined;
+    return this.searchEntryAndApply<t | undefined>(
+      key,
+      (entry) => entry[1],
+      undefined
+    );
   }
 
   set(newPair: [string, t]): NaiveMap<t> {
