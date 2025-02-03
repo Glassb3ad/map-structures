@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { createPair, first } from './util';
+import { createPair, first, second } from './util';
 
 const firstItem = 'first';
 const secondItem = 'second';
@@ -10,8 +10,13 @@ describe('Pair function', () => {
     expect(pair).toBeDefined();
   });
 
-  test('Create pair', () => {
+  test('get first pair', () => {
     const pair = createPair(firstItem, secondItem);
     expect(first(pair)).toBe(firstItem);
+  });
+
+  test('get second pair', () => {
+    const pair = createPair(firstItem, secondItem);
+    expect(second(pair)).toBe(secondItem);
   });
 });

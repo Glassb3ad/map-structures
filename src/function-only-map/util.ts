@@ -4,3 +4,4 @@ export const createPair =
     first ? fst : snd;
 
 export const first = <t>(pair: (first: boolean) => t) => pair(true);
+export const second = <t>(pair: (first: boolean) => t) => pair(false);
