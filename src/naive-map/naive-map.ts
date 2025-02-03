@@ -8,40 +8,44 @@ export class NaiveMap<t> {
   searchEntryAndApply<t1>(
     key: string,
     func: (entry: [string, t]) => t1,
-    fallback: t1
+    fallback: () => t1
   ): t1 {
     for (const pair of this.map) {
       if (pair[0] === key) {
         return func(pair);
       }
     }
-    return fallback;
+    return fallback();
   }
 
   has(key: string): boolean {
-    return this.searchEntryAndApply<boolean>(key, () => true, false);
+    return this.searchEntryAndApply<boolean>(
+      key,
+      () => true,
+      () => false
+    );
   }
 
   get(key: string): t | undefined {
     return this.searchEntryAndApply<t | undefined>(
       key,
       (entry) => entry[1],
-      undefined
+      () => undefined
     );
   }
 
   set(newPair: [string, t]): NaiveMap<t> {
-    const existingPair = this.searchEntryAndApply<[string, t] | undefined>(
+    return this.searchEntryAndApply<NaiveMap<t>>(
       newPair[0],
-      (entry) => entry,
-      undefined
+      (entry) => {
+        entry[1] = newPair[1];
+        return this;
+      },
+      () => {
+        this.map.push([...newPair]);
+        return this;
+      }
     );
-    if (existingPair) {
-      existingPair[1] = newPair[1];
-    } else {
-      this.map.push([...newPair]);
-    }
-    return this;
   }
 
   delete(key: string): boolean {
