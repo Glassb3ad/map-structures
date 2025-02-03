@@ -6,7 +6,12 @@ export class NaiveMap<t> {
   }
 
   has(key: string): boolean {
-    return this.map.some((pair) => pair[0] === key);
+    for (const pair of this.map) {
+      if (pair[0] === key) {
+        return true;
+      }
+    }
+    return false;
   }
 
   get(key: string): t | undefined {
