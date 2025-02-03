@@ -19,33 +19,27 @@ export class NaiveMap<t> {
   }
 
   has(key: string): boolean {
-    return this.searchEntryAndApply<boolean>(
-      key,
-      () => true,
-      () => false
-    );
+    const func = () => true;
+    const fallback = () => false;
+    return this.searchEntryAndApply<boolean>(key, func, fallback);
   }
 
   get(key: string): t | undefined {
-    return this.searchEntryAndApply<t | undefined>(
-      key,
-      (entry) => entry[1],
-      () => undefined
-    );
+    const func = (entry: [string, t]) => entry[1];
+    const fallback = () => undefined;
+    return this.searchEntryAndApply<t | undefined>(key, func, fallback);
   }
 
   set(newPair: [string, t]): NaiveMap<t> {
-    return this.searchEntryAndApply<NaiveMap<t>>(
-      newPair[0],
-      (entry) => {
-        entry[1] = newPair[1];
-        return this;
-      },
-      () => {
-        this.map.push([...newPair]);
-        return this;
-      }
-    );
+    const func = (entry: [string, t]) => {
+      entry[1] = newPair[1];
+      return this;
+    };
+    const fallback = () => {
+      this.map.push([...newPair]);
+      return this;
+    };
+    return this.searchEntryAndApply<NaiveMap<t>>(newPair[0], func, fallback);
   }
 
   delete(key: string): boolean {
