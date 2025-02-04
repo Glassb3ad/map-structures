@@ -1,9 +1,9 @@
-type Pair<t1, t2> = (first: boolean) => t1 | t2 | null;
+type Pair<t> = (first: boolean) => t | null;
 
 export const createPair =
-  <t1, t2>(fst: t1, snd: t2): Pair<t1, t2> =>
+  <t>(fst: t, snd: t): Pair<t> =>
   (first: boolean) =>
     first ? fst : snd;
 
-export const first = <t1, t2>(pair: Pair<t1, t2>) => pair(true);
-export const second = <t1, t2>(pair: Pair<t1, t2>) => pair(false);
+export const first = <t>(pair: Pair<t>) => pair(true);
+export const second = <t>(pair: Pair<t>) => pair(false);
