@@ -32,15 +32,17 @@ describe('Linked list', () => {
     expect(secondPair).toEqual(['2', '2']);
   });
 
-  test('getItem returns null if linked list is empty', () => {
-    const linkedList = createLinkedList([]);
-    const item = getItem(linkedList);
-    expect(item).toBeNull();
-  });
+  describe('getItem', () => {
+    test('return null if linked list is empty', () => {
+      const linkedList = createLinkedList([]);
+      const item = getItem(linkedList);
+      expect(item).toBeNull();
+    });
 
-  test('returns item', () => {
-    const linkedList = createLinkedList([firstItem]);
-    const item = getItem(linkedList);
-    expect(item).toBe(firstItem);
+    test('return item', () => {
+      const linkedList = createLinkedList([firstItem]);
+      const item = getItem(linkedList);
+      expect(item).toBe(firstItem);
+    });
   });
 });
