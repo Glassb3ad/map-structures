@@ -10,15 +10,12 @@ export const second = <T, U>(pair: Pair<T, U>) => pair(false);
 
 type LinkedList<T> = ((boolean: boolean) => T | LinkedList<T>) | null;
 
-type CreateLinkedList = <T>(
-  entries: Array<[string, T]>
-) => LinkedList<Pair<string, T>>;
+type CreateLinkedList = <T>(entries: Array<T>) => LinkedList<T>;
 
 export const createLinkedList: CreateLinkedList = (entries) => {
   if (entries.length === 0) {
     return null;
   }
   const [entry, ...rest] = entries;
-  return (boolean: boolean) =>
-    boolean ? createPair(entry[0], entry[1]) : createLinkedList(rest);
+  return (boolean: boolean) => (boolean ? entry : createLinkedList(rest));
 };
