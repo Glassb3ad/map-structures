@@ -15,4 +15,5 @@ export const getItem = <T>(linkedList: LinkedList<T>) => {
 
 export const next = <T>(linkedList: LinkedList<T>) => {
   if (!linkedList) return null;
+  return linkedList(false) as LinkedList<T>;
 };

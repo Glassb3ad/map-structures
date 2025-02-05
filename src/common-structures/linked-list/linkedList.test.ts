@@ -47,5 +47,14 @@ describe('Linked list', () => {
       const item = next(linkedList);
       expect(item).toBeNull();
     });
+
+    test('return next list', () => {
+      const linkedList = createLinkedList([firstItem, secondItem]);
+      const secondList = next(linkedList);
+      expect(secondList).toBeTypeOf('function');
+      const secondListItem =
+        typeof secondList === 'function' ? secondList(true) : null;
+      expect(secondListItem).toBe(secondItem);
+    });
   });
 });
