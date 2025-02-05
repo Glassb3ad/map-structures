@@ -8,10 +8,8 @@ export const createLinkedList = <T>(entries: Array<T>): LinkedList<T> => {
   return (boolean: boolean) => (boolean ? entry : createLinkedList(rest));
 };
 
-export const getItem = <T>(linkedList: LinkedList<T>) => {
-  if (!linkedList) return null;
-  return linkedList(true) as T;
-};
+export const getItem = <T>(linkedList: LinkedList<T>) =>
+  linkedList ? (linkedList(true) as T) : null;
 
 export const next = <T>(linkedList: LinkedList<T>) => {
   if (!linkedList) return null;
