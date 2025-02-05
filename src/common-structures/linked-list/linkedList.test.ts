@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { createLinkedList } from './util';
+import { createLinkedList } from './linkedList';
 
 const firstItem = 'first';
 const secondItem = 'second';
