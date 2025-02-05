@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { createLinkedList, getItem } from './linkedList';
+import { createLinkedList, getItem, next } from './linkedList';
 
 const firstItem = 'first';
 const secondItem = 'second';
@@ -38,6 +38,14 @@ describe('Linked list', () => {
       const linkedList = createLinkedList([firstItem]);
       const item = getItem(linkedList);
       expect(item).toBe(firstItem);
+    });
+  });
+
+  describe('next', () => {
+    test('return null if linked list is empty', () => {
+      const linkedList = createLinkedList([]);
+      const item = next(linkedList);
+      expect(item).toBeNull();
     });
   });
 });

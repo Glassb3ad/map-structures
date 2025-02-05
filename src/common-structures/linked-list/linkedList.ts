@@ -12,3 +12,7 @@ export const getItem = <T>(linkedList: LinkedList<T>) => {
   if (!linkedList) return null;
   return linkedList(true) as T;
 };
+
+export const next = <T>(linkedList: LinkedList<T>) => {
+  if (!linkedList) return null;
+};
