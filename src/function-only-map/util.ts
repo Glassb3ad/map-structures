@@ -8,8 +8,7 @@ export const createPair =
 export const first = <T, U>(pair: Pair<T, U>) => pair(true);
 export const second = <T, U>(pair: Pair<T, U>) => pair(false);
 
-type Empty = null;
-type LinkedList<T> = ((boolean: boolean) => T | LinkedList<T>) | Empty;
+type LinkedList<T> = ((boolean: boolean) => T | LinkedList<T>) | null;
 
 type CreateLinkedList = <T>(
   entries: Array<[string, T]>
