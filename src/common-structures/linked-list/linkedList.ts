@@ -7,3 +7,7 @@ export const createLinkedList = <T>(entries: Array<T>): LinkedList<T> => {
   const [entry, ...rest] = entries;
   return (boolean: boolean) => (boolean ? entry : createLinkedList(rest));
 };
+
+export const getItem = <T>(linkedList: LinkedList<T>) => {
+  if (!linkedList) return null;
+};
