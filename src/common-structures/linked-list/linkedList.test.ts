@@ -37,4 +37,10 @@ describe('Linked list', () => {
     const item = getItem(linkedList);
     expect(item).toBeNull();
   });
+
+  test('returns item', () => {
+    const linkedList = createLinkedList([firstItem]);
+    const item = getItem(linkedList);
+    expect(item).toBe(firstItem);
+  });
 });

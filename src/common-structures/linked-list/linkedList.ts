@@ -10,4 +10,5 @@ export const createLinkedList = <T>(entries: Array<T>): LinkedList<T> => {
 
 export const getItem = <T>(linkedList: LinkedList<T>) => {
   if (!linkedList) return null;
+  return linkedList(true) as T;
 };
