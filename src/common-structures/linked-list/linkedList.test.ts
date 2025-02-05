@@ -11,25 +11,20 @@ describe('Linked list', () => {
   });
 
   test('Create linked list with one pair', () => {
-    const LinkedList = createLinkedList<[string, string]>([
-      [firstItem, secondItem],
-    ]);
+    const LinkedList = createLinkedList<string>([firstItem]);
     expect(LinkedList).not.toBeNull();
-    const firstPair = LinkedList ? LinkedList(true) : null;
-    expect(firstPair).toEqual([firstItem, secondItem]);
+    const item = LinkedList ? LinkedList(true) : null;
+    expect(item).toEqual(item);
   });
 
   test('Create linked list with two pairs', () => {
-    const LinkedList = createLinkedList<[string, string]>([
-      [firstItem, secondItem],
-      ['2', '2'],
-    ]);
+    const LinkedList = createLinkedList<string>([firstItem, secondItem]);
     expect(LinkedList).not.toBeNull();
     const secondLink = LinkedList ? LinkedList(false) : null;
     expect(secondLink).toBeTypeOf('function');
     const secondPair =
       typeof secondLink === 'function' ? secondLink(true) : null;
-    expect(secondPair).toEqual(['2', '2']);
+    expect(secondPair).toEqual(secondItem);
   });
 
   describe('getItem', () => {
