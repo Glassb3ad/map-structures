@@ -18,3 +18,15 @@ describe('FOMap constructor', () => {
     expect(list).toEqual(testPairs);
   });
 });
+
+describe('FOMap.has', () => {
+  test('Check that there is pair with given key', () => {
+    const map = new FOMap<number>(testPairs);
+    expect(map.has(firstTestPairKey)).toBe(true);
+  });
+
+  // test('Check that there is no pair with given key', () => {
+  //   const map = new NaiveMap<number>(testPairs);
+  //   expect(map.has('notToBeFound')).toBe(false);
+  // });
+});

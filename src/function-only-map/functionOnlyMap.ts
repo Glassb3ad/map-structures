@@ -5,20 +5,28 @@ import {
 } from '../common-structures/linked-list/linkedList';
 import { first, Pair, second, toPairs } from '../common-structures/pair/pair';
 
+type Entry<T> = [string, T];
+type Entries<T> = Array<Entry<T>>;
 export class FOMap<T> {
   linkedList: LinkedList<Pair<string, T>>;
 
-  constructor(entries: Array<[string, T]> = []) {
+  constructor(entries: Entries<T> = []) {
     this.linkedList = createLinkedList(toPairs(entries));
   }
 
-  toList() {
-    return fold<Pair<string, T>, Array<[string, T]>>(
+  toList(): Entries<T> {
+    return fold<Pair<string, T>, Entries<T>>(
       this.linkedList,
-      (pair, acc) => {
-        return [...acc, [first(pair) as string, second(pair) as T]];
-      },
+      (pair, acc) => [...acc, [first(pair) as string, second(pair) as T]],
       []
+    );
+  }
+
+  has(key: string): boolean {
+    return fold<Pair<string, T>, boolean>(
+      this.linkedList,
+      (pair, acc) => (first(pair) === key ? true : acc),
+      false
     );
   }
 }
