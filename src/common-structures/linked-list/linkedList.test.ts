@@ -61,8 +61,18 @@ describe('Linked list', () => {
   describe('fold', () => {
     test('return cur if linked list is empty', () => {
       const linkedList = createLinkedList<string>([]);
-      const folded = fold(linkedList, (a: string) => a, 'hello');
+      const folded = fold(linkedList, (a) => a, 'hello');
       expect(folded).toBe('hello');
+    });
+
+    test('join every item in linked list', () => {
+      const linkedList = createLinkedList<string>(['Hello', ' ', 'world', '!']);
+      const folded = fold(
+        linkedList,
+        (item: string, cur: string) => `${cur}${item}`,
+        ''
+      );
+      expect(folded).toBe('Hello world!');
     });
   });
 });

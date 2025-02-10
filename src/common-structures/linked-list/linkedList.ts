@@ -1,4 +1,4 @@
-type LinkedList<T> = ((boolean: boolean) => T | LinkedList<T>) | null;
+export type LinkedList<T> = ((boolean: boolean) => T | LinkedList<T>) | null;
 
 export const createLinkedList = <T>(entries: Array<T>): LinkedList<T> => {
   if (entries.length === 0) {
@@ -8,7 +8,7 @@ export const createLinkedList = <T>(entries: Array<T>): LinkedList<T> => {
   return (boolean: boolean) => (boolean ? entry : createLinkedList(rest));
 };
 
-export const getItem = <T>(linkedList: LinkedList<T>) =>
+export const getItem = <T>(linkedList: LinkedList<T> | null) =>
   linkedList ? (linkedList(true) as T) : null;
 
 export const next = <T>(linkedList: LinkedList<T>) =>
@@ -16,8 +16,12 @@ export const next = <T>(linkedList: LinkedList<T>) =>
 
 export const fold = <T, U>(
   linkedList: LinkedList<T>,
-  func: (a: T) => U,
-  cur: U
+  func: (item: T, acc: U) => U,
+  acc: U
 ): U => {
-  return cur;
+  if (!linkedList) {
+    return acc;
+  }
+  const newAcc = func(getItem(linkedList) as T, acc);
+  return fold(next(linkedList), func, newAcc);
 };
