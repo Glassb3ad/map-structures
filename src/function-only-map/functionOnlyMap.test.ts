@@ -42,3 +42,25 @@ describe('FOMap.get', () => {
     expect(map.get('notToBeFound')).toBeUndefined();
   });
 });
+
+describe('NaiveMap.set', () => {
+  test('set new key-value pair', () => {
+    const map = new FOMap<number>(testPairs);
+    map.set(['newKey', 1]);
+    expect(map.get('newKey')).toBe(1);
+  });
+
+  test('if key-value pair exists replace the old value with new', () => {
+    const map = new FOMap<number>(testPairs);
+    map.set([firstTestPairKey, 200]);
+    expect(map.get(firstTestPairKey)).toBe(200);
+  });
+
+  test('Does not introduce duplicate keys when input key already exists', () => {
+    const map = new FOMap<number>(testPairs);
+    map.set([firstTestPairKey, 200]);
+    expect(
+      map.toList().filter((pair) => pair[0] === firstTestPairKey).length
+    ).toBe(1);
+  });
+});
