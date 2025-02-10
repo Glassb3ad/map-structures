@@ -13,3 +13,11 @@ export const getItem = <T>(linkedList: LinkedList<T>) =>
 
 export const next = <T>(linkedList: LinkedList<T>) =>
   linkedList ? (linkedList(false) as LinkedList<T>) : null;
+
+export const fold = <T, U>(
+  linkedList: LinkedList<T>,
+  func: (a: T) => U,
+  cur: U
+): U => {
+  return cur;
+};

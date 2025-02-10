@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { createLinkedList, getItem, next } from './linkedList';
+import { createLinkedList, fold, getItem, next } from './linkedList';
 
 const firstItem = 'first';
 const secondItem = 'second';
@@ -55,6 +55,14 @@ describe('Linked list', () => {
       const secondListItem =
         typeof secondList === 'function' ? secondList(true) : null;
       expect(secondListItem).toBe(secondItem);
+    });
+  });
+
+  describe('fold', () => {
+    test('return cur if linked list is empty', () => {
+      const linkedList = createLinkedList<string>([]);
+      const folded = fold(linkedList, (a: string) => a, 'hello');
+      expect(folded).toBe('hello');
     });
   });
 });
