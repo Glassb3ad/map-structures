@@ -78,4 +78,30 @@ export class FOMap<T> {
     }
     return this;
   }
+
+  delete(key: string): boolean {
+    const [listAccumulator, hasKey] = fold<
+      Pair<string, T>,
+      [ListAccumulator<T>, boolean]
+    >(
+      this.linkedList,
+      (pair, acc) => {
+        const matchesKey = first(pair) === key;
+        if (matchesKey) {
+          return [acc[0], true];
+        }
+        const newListAccumulator = (scnd: LinkedList<Pair<string, T>>) =>
+          acc[0]
+            ? acc[0]((bool: boolean) => (bool ? pair : scnd))
+            : (bool: boolean) => (bool ? pair : scnd);
+        return [newListAccumulator, acc[1]];
+      },
+      [undefined, false]
+    );
+    if (hasKey && listAccumulator) {
+      this.linkedList = listAccumulator(null);
+      return true;
+    }
+    return false;
+  }
 }

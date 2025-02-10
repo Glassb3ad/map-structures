@@ -64,3 +64,22 @@ describe('NaiveMap.set', () => {
     ).toBe(1);
   });
 });
+
+describe('NaiveMap.delete', () => {
+  test('return true when key has value', () => {
+    const map = new FOMap<number>(testPairs);
+    expect(map.delete(firstTestPairKey)).toBe(true);
+  });
+
+  test('remove key-value pair that matches key', () => {
+    const map = new FOMap<number>(testPairs);
+    map.delete(firstTestPairKey);
+    expect(map.toList()).not.toContainEqual(firstTestPair);
+  });
+
+  test('Does not remove key-value pairs that do not match key', () => {
+    const map = new FOMap<number>(testPairs);
+    map.delete(firstTestPairKey);
+    expect(map.toList()).toContainEqual(['2', 2]);
+  });
+});
