@@ -29,4 +29,12 @@ export class FOMap<T> {
       false
     );
   }
+
+  get(key: string): T | undefined {
+    return fold<Pair<string, T>, T | undefined>(
+      this.linkedList,
+      (pair, acc) => (first(pair) === key ? (second(pair) as T) : acc),
+      undefined
+    );
+  }
 }

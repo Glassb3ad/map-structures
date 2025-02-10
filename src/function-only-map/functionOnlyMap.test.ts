@@ -30,3 +30,15 @@ describe('FOMap.has', () => {
     expect(map.has('notToBeFound')).toBe(false);
   });
 });
+
+describe('FOMap.get', () => {
+  test('get value by key', () => {
+    const map = new FOMap<number>(testPairs);
+    expect(map.get(firstTestPairKey)).toBe(firstTestPairValue);
+  });
+
+  test('get undefined if there is no associated value for key', () => {
+    const map = new FOMap<number>(testPairs);
+    expect(map.get('notToBeFound')).toBeUndefined();
+  });
+});
