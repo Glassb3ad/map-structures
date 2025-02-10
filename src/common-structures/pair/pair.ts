@@ -9,3 +9,6 @@ export const first = <T, U>(pair: Pair<T, U>) => pair(true);
 export const second = <T, U>(pair: Pair<T, U>) => pair(false);
 
 export const toPair = <T, U>([fst, snd]: [T, U]) => createPair(fst, snd);
+
+export const toPairs = <T, U>(entries: Array<[T, U]>) =>
+  entries.map((a) => toPair(a));
