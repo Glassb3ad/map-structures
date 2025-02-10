@@ -48,7 +48,7 @@ export class FOMap<T> {
     );
   }
 
-  set([key, value]: [string, T]): FOMap<T> {
+  set([key, value]: [string, T]): this {
     const newPair = createPair(key, value);
     const [linkedListAcc, hasKey] = fold<
       Pair<string, T>,

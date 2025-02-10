@@ -1,4 +1,4 @@
-export type LinkedList<T> = ((boolean: boolean) => T | LinkedList<T>) | null;
+export type LinkedList<T> = ((flag: boolean) => T | LinkedList<T>) | null;
 
 export const createLinkedList = <T>(entries: Array<T>): LinkedList<T> => {
   if (entries.length === 0) {
