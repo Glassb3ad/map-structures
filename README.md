@@ -6,18 +6,20 @@ This repository contains a collection of map-structures which all implement the 
 
 - Map.has(key: string): returns true if key has entry in map
 - Map.get(key: string): returns entry for the key if one exitst. Otherwise return undefined
-- map.set([key, value]): adds key-value pair to map. If entry exists for the key, replace value.
-- map.detele(key: string): delete entry with given key and return true. Otherwise return false.
+- Map.set([key, value]): adds key-value pair to map. If entry exists for the key, replace value.
+- Map.detele(key: string): delete entry with given key and return true. Otherwise return false.
 
-## Naive map
+## Naive Map
 
 Naive map is simple implementation where map is an array of key-value pairs. Methods ensure that each key has only one value if any.
 
-## functions-only Naive map
+## Functions Only Naive map
 
-Map structure that uses only functions and boolean operators
+Map structure that uses only functions and boolean operators (no objects or arrays allowed!). The trick is that pair is implemented as a function. This is just for fun and has the same (or worst) time complexities as Naive map.
 
-## Hash map
+## Hash Map
+
+## Binary Tree Map
 
 # development
 
