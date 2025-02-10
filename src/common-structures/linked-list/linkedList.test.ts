@@ -22,8 +22,7 @@ describe('Linked list', () => {
     expect(LinkedList).not.toBeNull();
     const secondLink = LinkedList ? LinkedList(false) : null;
     expect(secondLink).toBeTypeOf('function');
-    const secondPair =
-      typeof secondLink === 'function' ? secondLink(true) : null;
+    const secondPair = typeof secondLink === 'function' ? secondLink(true) : null;
     expect(secondPair).toEqual(secondItem);
   });
 
@@ -52,8 +51,7 @@ describe('Linked list', () => {
       const linkedList = createLinkedList([firstItem, secondItem]);
       const secondList = next(linkedList);
       expect(secondList).toBeTypeOf('function');
-      const secondListItem =
-        typeof secondList === 'function' ? secondList(true) : null;
+      const secondListItem = typeof secondList === 'function' ? secondList(true) : null;
       expect(secondListItem).toBe(secondItem);
     });
   });
@@ -61,17 +59,13 @@ describe('Linked list', () => {
   describe('fold', () => {
     test('return cur if linked list is empty', () => {
       const linkedList = createLinkedList<string>([]);
-      const folded = fold(linkedList, (a) => a, 'hello');
+      const folded = fold(linkedList, a => a, 'hello');
       expect(folded).toBe('hello');
     });
 
     test('join every item in linked list', () => {
       const linkedList = createLinkedList<string>(['Hello', ' ', 'world', '!']);
-      const folded = fold(
-        linkedList,
-        (item: string, cur: string) => `${cur}${item}`,
-        ''
-      );
+      const folded = fold(linkedList, (item: string, cur: string) => `${cur}${item}`, '');
       expect(folded).toBe('Hello world!');
     });
   });

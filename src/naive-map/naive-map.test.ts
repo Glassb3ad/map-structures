@@ -14,7 +14,7 @@ describe('NaiveMap constructor', () => {
 
   test('Create NaiveMap with initial values', () => {
     const map = new NaiveMap<number>(testPairs);
-    testPairs.forEach((pair) => {
+    testPairs.forEach(pair => {
       expect(map.map).toContainEqual(pair);
     });
   });
@@ -60,9 +60,7 @@ describe('NaiveMap.set', () => {
   test('Does not introduce duplicate keys when input key already exists', () => {
     const map = new NaiveMap<number>(testPairs);
     map.set([firstTestPairKey, 200]);
-    expect(map.map.filter((pair) => pair[0] === firstTestPairKey).length).toBe(
-      1
-    );
+    expect(map.map.filter(pair => pair[0] === firstTestPairKey).length).toBe(1);
   });
 });
 

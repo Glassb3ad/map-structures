@@ -60,9 +60,7 @@ describe('FOMap', () => {
     test('Does not introduce duplicate keys when input key already exists', () => {
       const map = new FOMap<number>(testPairs);
       map.set([firstTestPairKey, 200]);
-      expect(
-        map.toList().filter((pair) => pair[0] === firstTestPairKey).length
-      ).toBe(1);
+      expect(map.toList().filter(pair => pair[0] === firstTestPairKey).length).toBe(1);
     });
   });
 
