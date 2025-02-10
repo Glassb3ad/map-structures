@@ -5,11 +5,7 @@ export class NaiveMap<t> {
     this.map = [...map];
   }
 
-  searchEntryAndApply<t1>(
-    key: string,
-    func: (entry: [string, t]) => t1,
-    fallback: () => t1
-  ): t1 {
+  searchEntryAndApply<t1>(key: string, func: (entry: [string, t]) => t1, fallback: () => t1): t1 {
     for (const pair of this.map) {
       if (pair[0] === key) {
         return func(pair);
