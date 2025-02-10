@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { createPair, first, second } from './pair';
+import { createPair, first, second, toPair } from './pair';
 
 const firstItem = 'first';
 const secondItem = 'second';
@@ -18,5 +18,11 @@ describe('Pair function', () => {
   test('get second pair', () => {
     const pair = createPair(firstItem, secondItem);
     expect(second(pair)).toBe(secondItem);
+  });
+
+  test('list to pair', () => {
+    const pair = toPair([firstItem, secondItem]);
+    expect(pair(true)).toBe(firstItem);
+    expect(pair(false)).toBe(secondItem);
   });
 });
