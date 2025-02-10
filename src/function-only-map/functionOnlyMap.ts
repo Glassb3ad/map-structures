@@ -14,7 +14,7 @@ import {
 type Entry<T> = [string, T];
 type Entries<T> = Array<Entry<T>>;
 
-type Accumulator<T> =
+type ListAccumulator<T> =
   | ((scnd: LinkedList<Pair<string, T>>) => LinkedList<Pair<string, T>>)
   | undefined;
 export class FOMap<T> {
@@ -49,26 +49,27 @@ export class FOMap<T> {
   }
 
   set([key, value]: [string, T]): FOMap<T> {
+    const newPair = createPair(key, value);
     const [linkedListAcc, hasKey] = fold<
       Pair<string, T>,
-      [Accumulator<T>, boolean]
+      [ListAccumulator<T>, boolean]
     >(
       this.linkedList,
       (pair, acc) => {
-        const newPair = first(pair) === key ? createPair(key, value) : pair;
-        const accumulator = (scnd: LinkedList<Pair<string, T>>) =>
+        const matchesKey = first(pair) === key;
+        const listItem = matchesKey ? newPair : pair;
+        const listAccumulator = (scnd: LinkedList<Pair<string, T>>) =>
           acc[0]
-            ? acc[0]((bool: boolean) => (bool ? newPair : scnd))
-            : (bool: boolean) => (bool ? newPair : scnd);
-        return [accumulator, first(pair) === key || acc[1]];
+            ? acc[0]((bool: boolean) => (bool ? listItem : scnd))
+            : (bool: boolean) => (bool ? listItem : scnd);
+        return [listAccumulator, matchesKey || acc[1]];
       },
       [undefined, false]
     );
+
     if (!linkedListAcc) {
       this.linkedList = null;
-      return this;
-    }
-    if (hasKey) {
+    } else if (hasKey) {
       this.linkedList = linkedListAcc(null);
     } else {
       this.linkedList = linkedListAcc((bool) =>
