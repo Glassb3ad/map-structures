@@ -1,8 +1,18 @@
-export class NaiveMap<t> {
+import { Map } from '@/map.class';
+
+export function createNaiveMap<t>(map: Array<[string, t]> = []) {
+  return new NaiveMap(map);
+}
+export class NaiveMap<t> extends Map<t> {
   map: Array<[string, t]> = [];
 
   constructor(map: Array<[string, t]> = []) {
+    super();
     this.map = [...map];
+  }
+
+  toArray(): Array<[string, t]> {
+    return this.map;
   }
 
   searchEntryAndApply<t1>(key: string, func: (entry: [string, t]) => t1, fallback: () => t1): t1 {
