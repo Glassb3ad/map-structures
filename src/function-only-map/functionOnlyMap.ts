@@ -1,18 +1,17 @@
+import { Entries, Map } from '@/map.class';
 import { createLinkedList, fold, LinkedList } from '../common-structures/linked-list/linkedList';
 import { createPair, first, Pair, second, toPairs } from '../common-structures/pair/pair';
 
-type Entry<T> = [string, T];
-type Entries<T> = Array<Entry<T>>;
-
 type ListAccumulator<T> = ((scnd: LinkedList<Pair<string, T>>) => LinkedList<Pair<string, T>>) | undefined;
-export class FOMap<T> {
+export class FOMap<T> extends Map<T> {
   linkedList: LinkedList<Pair<string, T>>;
 
   constructor(entries: Entries<T> = []) {
+    super();
     this.linkedList = createLinkedList(toPairs(entries));
   }
 
-  toList(): Entries<T> {
+  toArray(): Entries<T> {
     return fold<Pair<string, T>, Entries<T>>(
       this.linkedList,
       (pair, acc) => [...acc, [first(pair) as string, second(pair) as T]],

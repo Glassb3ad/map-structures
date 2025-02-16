@@ -1,8 +1,10 @@
 import { defineConfig } from 'vitest/config';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   test: {
     coverage: {
+      exclude: ['./src/test-utils', '*.config.*'],
       reporter: ['text', 'html'],
       thresholds: {
         statements: 90,
@@ -12,4 +14,6 @@ export default defineConfig({
       },
     },
   },
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  plugins: [tsconfigPaths()],
 });
