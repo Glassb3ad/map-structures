@@ -1,9 +1,11 @@
 export class BinaryTree<T> {
-  left: T | null;
-  right: T | null;
-  createrThan: (a: T | null, b: T | null) => boolean;
+  value: T;
+  left: BinaryTree<T> | null;
+  right: BinaryTree<T> | null;
+  createrThan: (a: T, b: T) => boolean;
 
-  constructor(createrThan: (a: T | null, b: T | null) => boolean) {
+  constructor(value: T, createrThan: (a: T, b: T) => boolean) {
+    this.value = value;
     this.left = null;
     this.right = null;
     this.createrThan = createrThan;

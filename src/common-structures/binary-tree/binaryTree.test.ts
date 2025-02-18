@@ -1,19 +1,16 @@
 import { expect, test, describe } from 'vitest';
 import { BinaryTree } from './binaryTree';
 
-const createrThan = (a: number | null, b: number | null) => {
-  if (!b) {
-    return true;
-  }
-  if (!a) {
-    return false;
-  }
-  return a >= b;
-};
+const createrThan = (a: number, b: number) => a >= b;
 
 describe('constructor', () => {
   test('Create tree', () => {
-    const tree = new BinaryTree<number>(createrThan);
+    const tree = new BinaryTree<number>(2, createrThan);
     expect(tree).toBeInstanceOf(BinaryTree);
+  });
+
+  test('Initial value is set', () => {
+    const tree = new BinaryTree<number>(2, createrThan);
+    expect(tree.value).toBe(2);
   });
 });
