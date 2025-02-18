@@ -14,3 +14,12 @@ describe('constructor', () => {
     expect(tree.value).toBe(2);
   });
 });
+
+describe('set', () => {
+  test('set value to right child when node has no children and new value is smaller than the current value', () => {
+    const tree = new BinaryTree<number>(2, createrThan);
+    tree.set(1);
+    expect(tree.right).toBeInstanceOf(BinaryTree);
+    expect(tree.right?.value).toBe(1);
+  });
+});

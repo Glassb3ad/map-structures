@@ -10,4 +10,8 @@ export class BinaryTree<T> {
     this.right = null;
     this.createrThan = createrThan;
   }
+
+  set(val: T) {
+    this.right = new BinaryTree<T>(val, this.createrThan);
+  }
 }
