@@ -20,7 +20,11 @@ export class BinaryTree<T> {
         this.left = newNode;
       }
     } else {
-      this.right = newNode;
+      if (this.right) {
+        this.right.set(val);
+      } else {
+        this.right = newNode;
+      }
     }
   }
 }

@@ -30,16 +30,21 @@ describe('set', () => {
     expect(tree.left?.value).toBe(1);
   });
 
-  test('set value to grandchild when node has left children and new value is smaller than previous values', () => {
-    const tree = new BinaryTree<number>(2, createrThan);
+  test('set value to left grandchild when node has left children and new value is smaller than previous values', () => {
+    const tree = new BinaryTree<number>(3, createrThan);
+    tree.left = new BinaryTree<number>(2, createrThan);
     tree.set(1);
-    tree.set(0.5);
     const child = tree.left;
-    expect(child).not.toBeNull();
-    expect(child?.value).toBe(1);
-    if (child) {
-      expect(child.left).not.toBeNull();
-      expect(child.left?.value).toBe(0.5);
-    }
+    expect(child.left).not.toBeNull();
+    expect(child.left?.value).toBe(1);
+  });
+
+  test('set value to right grandchild of right node when node has right children and new value is larger than previous values', () => {
+    const tree = new BinaryTree<number>(2, createrThan);
+    tree.right = new BinaryTree<number>(3, createrThan);
+    tree.set(4);
+    const child = tree.right;
+    expect(child.right).not.toBeNull();
+    expect(child.right?.value).toBe(4);
   });
 });
