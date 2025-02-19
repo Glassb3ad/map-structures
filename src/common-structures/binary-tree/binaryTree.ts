@@ -2,29 +2,33 @@ export class BinaryTree<T> {
   value: T;
   left: BinaryTree<T> | null;
   right: BinaryTree<T> | null;
-  createrThan: (a: T, b: T) => boolean;
+  compare: (a: T, b: T) => 1 | 0 | -1;
 
-  constructor(value: T, createrThan: (a: T, b: T) => boolean) {
+  constructor(value: T, compare: (a: T, b: T) => 1 | 0 | -1) {
     this.value = value;
     this.left = null;
     this.right = null;
-    this.createrThan = createrThan;
+    this.compare = compare;
   }
 
-  set(val: T) {
-    const newNode = new BinaryTree<T>(val, this.createrThan);
-    if (this.createrThan(this.value, val)) {
+  set(value: T) {
+    const comp = this.compare(this.value, value);
+    if (comp === 1) {
       if (this.left) {
-        this.left.set(val);
+        this.left.set(value);
       } else {
-        this.left = newNode;
+        this.left = new BinaryTree<T>(value, this.compare);
       }
-    } else {
+    }
+    if (comp === -1) {
       if (this.right) {
-        this.right.set(val);
+        this.right.set(value);
       } else {
-        this.right = newNode;
+        this.right = new BinaryTree<T>(value, this.compare);
       }
+    }
+    if (comp === 0) {
+      this.value = value;
     }
   }
 }

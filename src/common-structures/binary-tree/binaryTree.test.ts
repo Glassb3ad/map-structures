@@ -1,38 +1,43 @@
 import { expect, test, describe } from 'vitest';
 import { BinaryTree } from './binaryTree';
 
-const createrThan = (a: number, b: number) => a >= b;
+const compare = (a: number, b: number) => {
+  if (a === b) {
+    return 0;
+  }
+  return a > b ? 1 : -1;
+};
 
 describe('constructor', () => {
   test('Create tree', () => {
-    const tree = new BinaryTree<number>(2, createrThan);
+    const tree = new BinaryTree<number>(2, compare);
     expect(tree).toBeInstanceOf(BinaryTree);
   });
 
   test('Initial value is set', () => {
-    const tree = new BinaryTree<number>(2, createrThan);
+    const tree = new BinaryTree<number>(2, compare);
     expect(tree.value).toBe(2);
   });
 });
 
 describe('set', () => {
   test('set value to right child when node has no children and new value is creater than the current value', () => {
-    const tree = new BinaryTree<number>(2, createrThan);
+    const tree = new BinaryTree<number>(2, compare);
     tree.set(3);
     expect(tree.right).toBeInstanceOf(BinaryTree);
     expect(tree.right?.value).toBe(3);
   });
 
   test('set value to left child when node has no children and new value is smaller than the current value', () => {
-    const tree = new BinaryTree<number>(2, createrThan);
+    const tree = new BinaryTree<number>(2, compare);
     tree.set(1);
     expect(tree.left).toBeInstanceOf(BinaryTree);
     expect(tree.left?.value).toBe(1);
   });
 
   test('set value to left grandchild when node has left children and new value is smaller than previous values', () => {
-    const tree = new BinaryTree<number>(3, createrThan);
-    tree.left = new BinaryTree<number>(2, createrThan);
+    const tree = new BinaryTree<number>(3, compare);
+    tree.left = new BinaryTree<number>(2, compare);
     tree.set(1);
     const child = tree.left;
     expect(child.left).not.toBeNull();
@@ -40,11 +45,17 @@ describe('set', () => {
   });
 
   test('set value to right grandchild of right node when node has right children and new value is larger than previous values', () => {
-    const tree = new BinaryTree<number>(2, createrThan);
-    tree.right = new BinaryTree<number>(3, createrThan);
+    const tree = new BinaryTree<number>(2, compare);
+    tree.right = new BinaryTree<number>(3, compare);
     tree.set(4);
     const child = tree.right;
     expect(child.right).not.toBeNull();
     expect(child.right?.value).toBe(4);
+  });
+
+  test('if new value equals current value, replace current value with new value', () => {
+    const tree = new BinaryTree<[number, number]>([2, 4], (a, b) => compare(a[0], b[0]));
+    tree.set([2, 12]);
+    expect(tree.value).toEqual([2, 12]);
   });
 });
