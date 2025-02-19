@@ -16,6 +16,16 @@ export class BinaryTree<T> {
     if (comp === 0) {
       return this.value;
     }
+    if (comp === 1) {
+      if (this.left) {
+        return this.left.get(value);
+      } else {
+        return null;
+      }
+    }
+    if (this.right) {
+      return this.right.get(value);
+    }
   }
 
   set(value: T) {

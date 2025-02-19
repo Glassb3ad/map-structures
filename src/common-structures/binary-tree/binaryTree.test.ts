@@ -23,9 +23,26 @@ describe('constructor', () => {
 });
 
 describe('get', () => {
-  test('return nodes value when target value is equal to nodes value', () => {
+  test('return nodes value when target value is equal to node value', () => {
     const tree = new BinaryTree<[number, string]>([1, 'hello'], comparePairs);
     expect(tree.get([1, ''])).toEqual([1, 'hello']);
+  });
+
+  test('search from left child when target value is smaller than node value', () => {
+    const tree = new BinaryTree<[number, string]>([1, 'smthng'], comparePairs);
+    tree.left = new BinaryTree<[number, string]>([0.5, 'hello'], comparePairs);
+    expect(tree.get([0.5, ''])).toEqual([0.5, 'hello']);
+  });
+
+  test('return null when target value is smaller than node value and left child is null', () => {
+    const tree = new BinaryTree<[number, string]>([1, 'smthng'], comparePairs);
+    expect(tree.get([0.5, ''])).toBeNull();
+  });
+
+  test('search from right child when target value is greater than node value', () => {
+    const tree = new BinaryTree<[number, string]>([1, 'smthng'], comparePairs);
+    tree.right = new BinaryTree<[number, string]>([2, 'hello'], comparePairs);
+    expect(tree.get([2, ''])).toEqual([2, 'hello']);
   });
 });
 
