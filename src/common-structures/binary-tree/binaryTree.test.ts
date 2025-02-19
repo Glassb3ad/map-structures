@@ -44,6 +44,11 @@ describe('get', () => {
     tree.right = new BinaryTree<[number, string]>([2, 'hello'], comparePairs);
     expect(tree.get([2, ''])).toEqual([2, 'hello']);
   });
+
+  test('return null when target value is greater than node value and right child is null', () => {
+    const tree = new BinaryTree<[number, string]>([1, 'smthng'], comparePairs);
+    expect(tree.get([2, ''])).toBeNull();
+  });
 });
 
 describe('set', () => {
