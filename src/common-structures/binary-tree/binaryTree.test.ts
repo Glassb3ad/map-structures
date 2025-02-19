@@ -29,4 +29,17 @@ describe('set', () => {
     expect(tree.left).toBeInstanceOf(BinaryTree);
     expect(tree.left?.value).toBe(1);
   });
+
+  test('set value to grandchild when node has left children and new value is smaller than previous values', () => {
+    const tree = new BinaryTree<number>(2, createrThan);
+    tree.set(1);
+    tree.set(0.5);
+    const child = tree.left;
+    expect(child).not.toBeNull();
+    expect(child?.value).toBe(1);
+    if (child) {
+      expect(child.left).not.toBeNull();
+      expect(child.left?.value).toBe(0.5);
+    }
+  });
 });

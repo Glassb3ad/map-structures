@@ -14,7 +14,11 @@ export class BinaryTree<T> {
   set(val: T) {
     const newNode = new BinaryTree<T>(val, this.createrThan);
     if (this.createrThan(this.value, val)) {
-      this.left = newNode;
+      if (this.left) {
+        this.left.set(val);
+      } else {
+        this.left = newNode;
+      }
     } else {
       this.right = newNode;
     }
