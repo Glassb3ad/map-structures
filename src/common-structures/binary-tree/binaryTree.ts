@@ -11,6 +11,13 @@ export class BinaryTree<T> {
     this.compare = compare;
   }
 
+  get(value: T) {
+    const comp = this.compare(this.value, value);
+    if (comp === 0) {
+      return this.value;
+    }
+  }
+
   set(value: T) {
     const comp = this.compare(this.value, value);
     if (comp === 1) {

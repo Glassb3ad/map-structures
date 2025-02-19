@@ -8,6 +8,8 @@ const compare = (a: number, b: number) => {
   return a > b ? 1 : -1;
 };
 
+const comparePairs = (a: [number, string], b: [number, string]) => compare(a[0], b[0]);
+
 describe('constructor', () => {
   test('Create tree', () => {
     const tree = new BinaryTree<number>(2, compare);
@@ -17,6 +19,13 @@ describe('constructor', () => {
   test('Initial value is set', () => {
     const tree = new BinaryTree<number>(2, compare);
     expect(tree.value).toBe(2);
+  });
+});
+
+describe('get', () => {
+  test('return nodes value when target value is equal to nodes value', () => {
+    const tree = new BinaryTree<[number, string]>([1, 'hello'], comparePairs);
+    expect(tree.get([1, ''])).toEqual([1, 'hello']);
   });
 });
 
@@ -54,8 +63,8 @@ describe('set', () => {
   });
 
   test('if new value equals current value, replace current value with new value', () => {
-    const tree = new BinaryTree<[number, number]>([2, 4], (a, b) => compare(a[0], b[0]));
-    tree.set([2, 12]);
-    expect(tree.value).toEqual([2, 12]);
+    const tree = new BinaryTree<[number, string]>([2, 'hello'], comparePairs);
+    tree.set([2, 'holle']);
+    expect(tree.value).toEqual([2, 'holle']);
   });
 });
