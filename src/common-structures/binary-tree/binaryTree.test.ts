@@ -1,6 +1,23 @@
 import { expect, test, describe } from 'vitest';
 import { BinaryTree } from './binaryTree';
 
+const createTestTree = () => {
+  const tree = new BinaryTree<string>(['d', 'stmhing']);
+  const left = new BinaryTree<string>(['b', 'b']);
+  const leftLeft = new BinaryTree<string>(['a', 'a']);
+  const leftRight = new BinaryTree<string>(['c', 'c']);
+  left.left = leftLeft;
+  left.right = leftRight;
+  const right = new BinaryTree<string>(['f', 'f']);
+  const rightLeft = new BinaryTree<string>(['e', 'e']);
+  const rightRight = new BinaryTree<string>(['g', 'g']);
+  right.left = rightLeft;
+  right.right = rightRight;
+  tree.right = right;
+  tree.left = left;
+  return tree;
+};
+
 describe('constructor', () => {
   test('Create tree', () => {
     const tree = new BinaryTree<number>(['key', 2]);
@@ -10,6 +27,12 @@ describe('constructor', () => {
   test('Initial entry is set', () => {
     const tree = new BinaryTree<number>(['key', 2]);
     expect(tree.value).toEqual(['key', 2]);
+  });
+});
+
+describe.for([{ tree: createTestTree() }])('has', ({ tree }) => {
+  test('find value from root', () => {
+    expect(tree.has('a')).toEqual(true);
   });
 });
 
