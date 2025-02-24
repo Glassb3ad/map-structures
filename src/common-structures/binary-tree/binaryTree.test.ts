@@ -50,6 +50,10 @@ describe.for([{ tree: createTestTree() }])('has', ({ tree }) => {
   test('find value from left', () => {
     expect(tree.has(LEFT_KEY)).toBe(true);
   });
+
+  test('find value from right', () => {
+    expect(tree.has(RIGHT_KEY)).toBe(true);
+  });
 });
 
 describe('get', () => {

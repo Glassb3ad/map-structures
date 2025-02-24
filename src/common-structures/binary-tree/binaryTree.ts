@@ -40,6 +40,9 @@ export class BinaryTree<T> {
     if (comp === 1 && this.left) {
       return this.left.has(key);
     }
+    if (comp === -1 && this.right) {
+      return this.right.has(key);
+    }
     return false;
   }
 
