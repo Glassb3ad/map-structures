@@ -34,6 +34,10 @@ describe.for([{ tree: createTestTree() }])('has', ({ tree }) => {
   test('find value from root', () => {
     expect(tree.has('a')).toEqual(true);
   });
+
+  test('get false when key has no value', () => {
+    expect(tree.has('missing')).toEqual(false);
+  });
 });
 
 describe('get', () => {
