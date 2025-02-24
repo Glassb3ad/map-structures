@@ -33,7 +33,14 @@ export class BinaryTree<T> {
   }
 
   has(key: string): boolean {
-    return true;
+    const comp = compare(this.value[0], key);
+    if (comp === 0) {
+      return true;
+    }
+    if (comp === 1 && this.left) {
+      return this.left.has(key);
+    }
+    return false;
   }
 
   set(value: Entry<T>) {
