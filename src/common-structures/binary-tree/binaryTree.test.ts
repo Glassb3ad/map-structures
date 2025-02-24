@@ -4,21 +4,21 @@ import { BinaryTree } from './binaryTree';
 const ROOT_KEY = 'd';
 const LEFT_KEY = 'b';
 const LEFT_LEFT_KEY = 'a';
-const LEFT__RIGHT_KEY = 'c';
+const LEFT_RIGHT_KEY = 'c';
 const RIGHT_KEY = 'f';
 const RIGHT_LEFT_KEY = 'e';
-const RIGHT__RIGHT_KEY = 'g';
+const RIGHT_RIGHT_KEY = 'g';
 
 const createTestTree = () => {
   const tree = new BinaryTree<string>([ROOT_KEY, 'd']);
   const left = new BinaryTree<string>([LEFT_KEY, 'b']);
   const leftLeft = new BinaryTree<string>([LEFT_LEFT_KEY, 'a']);
-  const leftRight = new BinaryTree<string>([LEFT__RIGHT_KEY, 'c']);
+  const leftRight = new BinaryTree<string>([LEFT_RIGHT_KEY, 'c']);
   left.left = leftLeft;
   left.right = leftRight;
   const right = new BinaryTree<string>([RIGHT_KEY, 'f']);
   const rightLeft = new BinaryTree<string>([RIGHT_LEFT_KEY, 'e']);
-  const rightRight = new BinaryTree<string>([RIGHT__RIGHT_KEY, 'g']);
+  const rightRight = new BinaryTree<string>([RIGHT_RIGHT_KEY, 'g']);
   right.left = rightLeft;
   right.right = rightRight;
   tree.right = right;
@@ -53,6 +53,22 @@ describe.for([{ tree: createTestTree() }])('has', ({ tree }) => {
 
   test('find value from right', () => {
     expect(tree.has(RIGHT_KEY)).toBe(true);
+  });
+
+  test('find value from right-right', () => {
+    expect(tree.has(RIGHT_RIGHT_KEY)).toBe(true);
+  });
+
+  test('find value from left-left', () => {
+    expect(tree.has(RIGHT_LEFT_KEY)).toBe(true);
+  });
+
+  test('find value from left-right', () => {
+    expect(tree.has(LEFT_RIGHT_KEY)).toBe(true);
+  });
+
+  test('find value from right-left', () => {
+    expect(tree.has(LEFT_LEFT_KEY)).toBe(true);
   });
 });
 
