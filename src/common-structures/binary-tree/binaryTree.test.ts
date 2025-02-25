@@ -148,4 +148,12 @@ describe('delete', () => {
     tree.delete(LEFT_KEY);
     expect(tree.left).toBeNull();
   });
+
+  test('delete right child', () => {
+    const tree = new BinaryTree<number>([ROOT_KEY, 1]);
+    tree.left = new BinaryTree<number>([LEFT_KEY, 2]);
+    tree.right = new BinaryTree<number>([RIGHT_KEY, 3]);
+    tree.delete(RIGHT_KEY);
+    expect(tree.right).toBeNull();
+  });
 });
