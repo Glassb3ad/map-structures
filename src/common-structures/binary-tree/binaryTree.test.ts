@@ -140,3 +140,12 @@ describe('set', () => {
     expect(tree.value[1]).toBe('hello');
   });
 });
+
+describe('delete', () => {
+  test('delete left child', () => {
+    const tree = new BinaryTree<number>([ROOT_KEY, 1]);
+    tree.left = new BinaryTree<number>([LEFT_KEY, 2]);
+    tree.delete(LEFT_KEY);
+    expect(tree.left).toBeNull();
+  });
+});

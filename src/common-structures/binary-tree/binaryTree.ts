@@ -66,4 +66,8 @@ export class BinaryTree<T> {
       this.value = value;
     }
   }
+
+  delete(key: string) {
+    this.left = null;
+  }
 }
