@@ -8,20 +8,25 @@ const compare = (str1: string, str2: string) => {
   return result > 0 ? 1 : -1;
 };
 export class BinaryTree<T> {
-  value: Entry<T>;
+  key: string | null;
+  value: T;
   left: BinaryTree<T> | null;
   right: BinaryTree<T> | null;
 
-  constructor(value: Entry<T>) {
-    this.value = value;
+  constructor(entry: Entry<T>) {
+    this.key = entry[0];
+    this.value = entry[1];
     this.left = null;
     this.right = null;
   }
 
   get(key: string): T | null {
-    const comp = compare(this.value[0], key);
+    if (!this.key) {
+      return null;
+    }
+    const comp = compare(this.key, key);
     if (comp === 0) {
-      return this.value[1];
+      return this.value;
     }
     if (comp === 1 && this.left) {
       return this.left.get(key);
@@ -33,7 +38,10 @@ export class BinaryTree<T> {
   }
 
   has(key: string): boolean {
-    const comp = compare(this.value[0], key);
+    if (!this.key) {
+      return false;
+    }
+    const comp = compare(this.key, key);
     if (comp === 0) {
       return true;
     }
@@ -46,29 +54,34 @@ export class BinaryTree<T> {
     return false;
   }
 
-  set(value: Entry<T>) {
-    const comp = compare(this.value[0], value[0]);
+  set(entry: Entry<T>) {
+    if (!this.key) {
+      this.key = entry[0];
+      this.value = entry[1];
+      return;
+    }
+    const comp = compare(this.key, entry[0]);
     if (comp === 1) {
       if (this.left) {
-        this.left.set(value);
+        this.left.set(entry);
       } else {
-        this.left = new BinaryTree<T>(value);
+        this.left = new BinaryTree<T>(entry);
       }
     }
     if (comp === -1) {
       if (this.right) {
-        this.right.set(value);
+        this.right.set(entry);
       } else {
-        this.right = new BinaryTree<T>(value);
+        this.right = new BinaryTree<T>(entry);
       }
     }
     if (comp === 0) {
-      this.value = value;
+      this.value = entry[1];
     }
   }
 
   delete(key: string) {
-    if (this.right?.value[0] === key) {
+    if (this.right && this.right.key === key) {
       this.right = null;
     } else {
       this.left = null;

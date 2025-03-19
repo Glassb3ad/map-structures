@@ -34,7 +34,8 @@ describe('constructor', () => {
 
   test('Initial entry is set', () => {
     const tree = new BinaryTree<number>(['key', 2]);
-    expect(tree.value).toEqual(['key', 2]);
+    expect(tree.value).toEqual(2);
+    expect(tree.key).toEqual('key');
   });
 });
 
@@ -106,14 +107,14 @@ describe('set', () => {
     const tree = new BinaryTree<number>(['a', 2]);
     tree.set(['b', 3]);
     expect(tree.right).toBeInstanceOf(BinaryTree);
-    expect(tree.right?.value[1]).toBe(3);
+    expect(tree.right?.value).toBe(3);
   });
 
   test('set value to left child when node has no children and new value is smaller than the current value', () => {
     const tree = new BinaryTree<number>(['b', 2]);
     tree.set(['a', 3]);
     expect(tree.left).toBeInstanceOf(BinaryTree);
-    expect(tree.left?.value[1]).toBe(3);
+    expect(tree.left?.value).toBe(3);
   });
 
   test('set value to left grandchild when node has left children and new value is smaller than previous values', () => {
@@ -122,7 +123,7 @@ describe('set', () => {
     tree.set(['a', 4]);
     const child = tree.left;
     expect(child.left).not.toBeNull();
-    expect(child.left?.value[1]).toBe(4);
+    expect(child.left?.value).toBe(4);
   });
 
   test('set value to right grandchild of node when node has right children and new value is larger than previous values', () => {
@@ -131,13 +132,13 @@ describe('set', () => {
     tree.set(['c', 4]);
     const child = tree.right;
     expect(child.right).not.toBeNull();
-    expect(child.right?.value[1]).toBe(4);
+    expect(child.right?.value).toBe(4);
   });
 
   test('if new value equals current value, replace current value with new value', () => {
     const tree = new BinaryTree<string>(['a', 'smthing']);
     tree.set(['a', 'hello']);
-    expect(tree.value[1]).toBe('hello');
+    expect(tree.value).toBe('hello');
   });
 });
 
