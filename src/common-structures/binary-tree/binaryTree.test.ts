@@ -143,6 +143,16 @@ describe('set', () => {
 });
 
 describe('delete', () => {
+  test('Return empty tree if root has key', () => {
+    const tree = new BinaryTree<number>([ROOT_KEY, 1]);
+    tree.left = new BinaryTree<number>([LEFT_KEY, 2]);
+    tree.right = new BinaryTree<number>([RIGHT_KEY, 2]);
+    tree.delete(ROOT_KEY);
+    expect(tree.key).toBeNull();
+    expect(tree.left).toBeNull();
+    expect(tree.right).toBeNull();
+  });
+
   test('delete left child', () => {
     const tree = new BinaryTree<number>([ROOT_KEY, 1]);
     tree.left = new BinaryTree<number>([LEFT_KEY, 2]);

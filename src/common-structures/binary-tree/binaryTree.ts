@@ -80,11 +80,37 @@ export class BinaryTree<T> {
     }
   }
 
+  deleteRec(key: string): this | null {
+    if (!this.key) {
+      return null;
+    }
+    const comp = compare(this.key, key);
+    if (comp === 1 && this.left) {
+      this.left = this.left.deleteRec(key);
+      return this;
+    }
+    if (comp === -1 && this.right) {
+      this.right = this.right.deleteRec(key);
+      return this;
+    }
+    return null;
+  }
+
   delete(key: string) {
-    if (this.right && this.right.key === key) {
-      this.right = null;
-    } else {
+    if (!this.key) {
+      return;
+    }
+    const comp = compare(this.key, key);
+    if (comp === 1 && this.left) {
+      this.left = this.left.deleteRec(key);
+    }
+    if (comp === -1 && this.right) {
+      this.right = this.right.deleteRec(key);
+    }
+    if (comp === 0) {
+      this.key = null;
       this.left = null;
+      this.right = null;
     }
   }
 }
